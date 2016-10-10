@@ -12,6 +12,16 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    it "renders the user's profile page" do
+
+      get :show
+
+      expect(response).to render_template("show")
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe "POST #create" do
     context "with invalid params" do
       it "validates the presence of username and password" do
