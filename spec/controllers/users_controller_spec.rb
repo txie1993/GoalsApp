@@ -13,9 +13,10 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "GET #show" do
+    subject(:bob) {User.create(username:"bob", password: "password")}
     it "renders the user's profile page" do
 
-      get :show
+      get :show, id: bob.id
 
       expect(response).to render_template("show")
       expect(response).to have_http_status(200)
@@ -25,7 +26,7 @@ RSpec.describe UsersController, type: :controller do
   describe "POST #create" do
     context "with invalid params" do
       it "validates the presence of username and password" do
-        post :create, user: {}
+        post :create, user: {username: "dfakjklsdfjlasjfd"}
         expect(response).to render_template("new")
         expect(flash[:errors]).to be_present
       end
